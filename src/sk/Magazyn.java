@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
-
+//TODO do likwidacji
 public class Magazyn implements MagazynInt{
     private String nazwa;
     private ArrayList<Produkt> plytyGl;
