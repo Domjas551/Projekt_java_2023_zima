@@ -45,7 +45,7 @@ class NoRecords extends RuntimeException{
     }
 }
 
-public class BadDataException extends Exception{
+ class BadDataException extends Exception{
 
     private String message;
     private String field;
@@ -69,7 +69,7 @@ public class BadDataException extends Exception{
 }
 
 
-public class BadPasswordException extends Exception{
+class BadPasswordException extends Exception{
 
     private String message;
 

@@ -12,33 +12,31 @@ public class Transakcja
     private String nazwisko;
     private LocalDateTime data;
     private double cenaCalkowita;
-    private Reklamacja reklamacja;
 
+    private ArrayList<Reklamacja> reklamacje;
     private ArrayList<LogTransakcji> logi;
 
 
     public Transakcja(){};
-    public Transakcja(int idTransakcji,String email,String imie,String nazwisko)
-    {
-        this.idTransakcji=idTransakcji;
-        this.email=email;
-        this.imie=imie;
-        this.nazwisko=nazwisko;
-        this.data= LocalDateTime.now();
-        this.cenaCalkowita=0;
-        this.reklamacja= new Reklamacja(this);
+    public Transakcja(int idTransakcji,String email,String imie,String nazwisko) {
+        this.idTransakcji = idTransakcji;
+        this.email = email;
+        this.imie = imie;
+        this.nazwisko = nazwisko;
+        this.data = LocalDateTime.now();
+        this.cenaCalkowita = 0;
+        this.reklamacje = new ArrayList<>();
         this.logi=new ArrayList<>();
 
     }
 
-    public Reklamacja getReklamacja() {
-        return reklamacja;
+    public ArrayList<Reklamacja> getReklamacje() {
+        return reklamacje;
     }
 
-    public void setReklamacja(Reklamacja reklamacja) {
-        this.reklamacja = reklamacja;
+    public void setReklamacje(ArrayList<Reklamacja> reklamacje) {
+        this.reklamacje = reklamacje;
     }
-
 
     public int getIdTransakcji() {
         return idTransakcji;
@@ -99,16 +97,24 @@ public class Transakcja
     public void dodajLog(String nazwa,int typ, double cena)
     {
         this.logi.add(new LogTransakcji(nazwa,typ,cena));
+        this.reklamacje.add(new Reklamacja(this,nazwa));
     }
 
     public String toString(){
         String p1="";
         String p2="";
+        int s1=0;
 
-        if(reklamacja.isCzyDokonano())
+        for(int i=0; i<reklamacje.size();i++) {
+            if (reklamacje.get(i).isCzyDokonano()) {
+                p2 = p2+ "\n" + reklamacje.get(i);
+                s1=1;
+            }
+        }
+
+        if(s1==0)
         {
-            p2="\nReklamacja:" +
-               "\n"+reklamacja;
+            p2="\n---";
         }
 
         if(logi.size()==0)
@@ -122,7 +128,7 @@ public class Transakcja
         }
         return "\nID Transakcji: "+idTransakcji+" Cena całkowita: "+cenaCalkowita+"zł Kupujący: "+imie+" "+nazwisko+" Email: "+email+" Data: "+data.truncatedTo(ChronoUnit.MINUTES)+
                "\nWykaz zawartosci koszyka:" + p1+
-               "\nCzy dokonano reklamacji: "+reklamacja.czyReklamowano()+p2;
+               "\nReklamacje: "+p2;
 
     }
 

@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        /*
+
         //Zmiany
         //Usunięcie
         //sklep budynek
@@ -17,7 +17,7 @@ public class Main {
 
         Budynek b1=new Budynek("Szlak 1","1000 m2",sk);
 
-        Magazyn m1=new Magazyn("Magazyn 1",b1);
+        Magazyn m1=new Magazyn("Magazyn 1");
         System_sklepu sy=new System_sklepu(sk);
 
         sk.setMagazyn(m1);
@@ -29,9 +29,9 @@ public class Main {
 
         //testy działania f. systemowych na klientach
         //sy.wypiszPracownikow();
-        sy.dodajPracownika(p1);
-        sy.dodajPracownika(p2);
-*/
+        //sy.dodajPracownika(p1);
+        //sy.dodajPracownika(p2);
+
         /*sy.wypiszPracownikow();
         sy.usunPracownika(p2);
         sy.wypiszPracownikow();
@@ -54,7 +54,7 @@ public class Main {
 
  */
         //tworzenie komponentów
-        /*
+
         Dysk d=new Dysk("Goodram",5,"Dysk ssd","dysk.jpg","samsung",99.99,5,"512 GB","SSD",70,7,100);
         Pam_RAM pam=new Pam_RAM("Crucia",5,"Pamięć ram","pamram.jpg","Crucial",309,4,"DDR4",32,3200,1.2);
         Karta_graf k=new Karta_graf("Inno3d",5,"Karta graf.","kartaG.jpg","Nvidia",3990,3,"GeForce RTX z serii 40","PCIe 4.0 x16",12,
@@ -72,15 +72,15 @@ public class Main {
         //testowanie f.
         //m1.zamowNowyKomponent();
         m1.wypiszInwentarz();
-        m1.uzupelnijInwentarz();
-        m1.zamowKomponent(p,10);
-        m1.wypiszInwentarz();
+        //m1.uzupelnijInwentarz();
+        //m1.zamowKomponent(p,10);
+        //m1.wypiszInwentarz();
         //testowanie f. zestawów
         //p1.utworzZestaw(m1);
         //m1.wypiszZestawy();
 
         //testowanie transakcji
-        Kasa ka= new Kasa(b1);
+        //Kasa ka= new Kasa(b1);
         /*
         sy.sprzedaj(p1);
         sy.sprzedaj(p1);
@@ -91,20 +91,19 @@ public class Main {
         */
 
         //testowanie reklamacji
-        /*
         sy.dokonajReklamacji(1);
         sy.sprzedaj(p1);
-        sy.sprzedaj(p1);
-        ka.sprzedaj(p2);
+        //sy.sprzedaj(p1);
+        //ka.sprzedaj(p2);
         sy.wypiszTransakcje();
         sy.wypiszReklamacje();
         sy.dokonajReklamacji(1);
         sy.dokonajReklamacji(1);
-        sy.dokonajReklamacji(2);
-        sy.dokonajReklamacji(3);
+        sy.dokonajReklamacji(1);
+        //sy.dokonajReklamacji(3);
         sy.wypiszTransakcje();
         sy.wypiszReklamacje();
-        */
+
 
         //testowanie skaldania i anulowania zamowien
         /*
@@ -118,8 +117,8 @@ public class Main {
         sy.wypiszZamowienia();
          */
 
-        Rejestracja rej=new Rejestracja();
-        rej.zarejestroj();
+        //Rejestracja rej=new Rejestracja();
+        //rej.zarejestruj();
 
     }
 }

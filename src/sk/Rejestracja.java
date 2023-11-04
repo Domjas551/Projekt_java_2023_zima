@@ -9,7 +9,7 @@ public class Rejestracja {
 
     public Rejestracja(){}
 
-    public void zarejestroj(){
+    public void zarejestruj(){
         Scanner scan = new Scanner(System.in);
 
         String imie;
