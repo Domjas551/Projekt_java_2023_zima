@@ -508,6 +508,7 @@ public class System_sklepu implements SystemInt{
     public void dokonajReklamacji(int idTransakcji) {
         Scanner scan = new Scanner(System.in);
         int i = -1;
+        int x =-1;
         int s2 = 0;
         String powod = "";
         boolean s1 = false;
@@ -522,7 +523,17 @@ public class System_sklepu implements SystemInt{
         if (!s1) {
             System.out.println("\nNie znaleziono w bazie danych transakcji o takim ID!");
         } else {
-            if (transakcje.get(i).getReklamacja().isCzyDokonano()) {
+                System.out.println("\nWybrana transakcja:\n" + transakcje.get(i));
+                System.out.println("\nReklamacji ktorego z produktow chcesz dokonac?(<1-" + (transakcje.get(i).getLogi().size()) + ">): ");
+                x = scan.nextInt();
+                scan.nextLine();
+                x--;
+
+            if(!(x>=0&&x<=transakcje.get(i).getReklamacje().size()))
+            {
+                System.out.println("\nPodano bledny numer produktu!");
+            }
+            else if (transakcje.get(i).getReklamacje().get(x).isCzyDokonano()) {
                 System.out.println("\nReklamacji w sprawie tych produktów już dokonano!");
             } else if (LocalDateTime.now().isAfter(transakcje.get(i).getData().plusYears(2))) {
                 System.out.println("\nOd dokonania transakcji upłynęły już ponad dwa lata. Reklamacja nie jest możliwa!");
@@ -542,12 +553,12 @@ public class System_sklepu implements SystemInt{
                 if (s2 == 0) {
                     System.out.println("Akcja anulowana!");
                 } else {
-                    transakcje.get(i).getReklamacja().setCzyDokonano(true);
-                    transakcje.get(i).getReklamacja().setDataReklamacji(LocalDateTime.now());
+                    transakcje.get(i).getReklamacje().get(x).setCzyDokonano(true);
+                    transakcje.get(i).getReklamacje().get(x).setDataReklamacji(LocalDateTime.now());
                     System.out.println("Proszę podać powód reklamacji:");
                     powod = scan.nextLine();
-                    transakcje.get(i).getReklamacja().setPowod(powod);
-                    reklamacje.add(transakcje.get(i).getReklamacja());
+                    transakcje.get(i).getReklamacje().get(x).setPowod(powod);
+                    reklamacje.add(transakcje.get(i).getReklamacje().get(x));
                     System.out.println("Dokonano reklamacji!");
 
                     String a = "";

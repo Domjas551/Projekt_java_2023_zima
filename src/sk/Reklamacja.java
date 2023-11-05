@@ -3,17 +3,19 @@ package sk;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
-public class Reklamacja implements ReklamacjaInt
+public class Reklamacja
 {
     private boolean czyDokonano;
+    private String nazwaProduktu;
     private LocalDateTime dataReklamacji;
     private String powod;
     private Transakcja transakcja;
 
     public Reklamacja(){}
-    public Reklamacja(Transakcja transakcja) {
+    public Reklamacja(Transakcja transakcja, String nazwaProduktu) {
         this.czyDokonano = false;
         this.dataReklamacji = null;
+        this.nazwaProduktu=nazwaProduktu;
         this.powod ="";
         this.transakcja=transakcja;
     }
@@ -50,20 +52,16 @@ public class Reklamacja implements ReklamacjaInt
         this.powod = powod;
     }
 
-    public String czyReklamowano()
-    {
-        if(czyDokonano)
-        {
-            return "Tak";
-        }
-        else
-        {
-            return "Nie";
-        }
+    public String getNazwaProduktu() {
+        return nazwaProduktu;
+    }
+
+    public void setNazwaProduktu(String nazwaProduktu) {
+        this.nazwaProduktu = nazwaProduktu;
     }
 
     @Override
     public String toString() {
-        return "ID transakcji: "+transakcja.getIdTransakcji()+" Data reklamacji: "+dataReklamacji.truncatedTo(ChronoUnit.MINUTES)+"\nPowod reklamacji:\n"+powod;
+        return "ID transakcji: "+transakcja.getIdTransakcji()+" Data reklamacji: "+dataReklamacji.truncatedTo(ChronoUnit.MINUTES)+" Produkt: "+nazwaProduktu+"\nPowod reklamacji:\n"+powod;
     }
 }

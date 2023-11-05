@@ -55,8 +55,3 @@ interface ProduktInt
 {
     public void wypiszOpis();
 }
-
-interface ReklamacjaInt
-{
-    public String czyReklamowano();
-}

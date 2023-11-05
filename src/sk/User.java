@@ -7,14 +7,14 @@ public class User {
     protected String login;
     protected String haslo;
 
-    public User(){};
+    public User(){}
     public User(String imie,String nazwisko,String email,String login,String haslo){
         try {
             if(imie==null||nazwisko==null||email==null||login==null||haslo==null){
                 throw new NullValue();
             }
             if(haslo.length()<6){
-                throw new TooShortPassword();
+                throw new BadPasswordException();
             }
             this.imie = imie;
             this.nazwisko = nazwisko;
@@ -23,7 +23,7 @@ public class User {
             this.haslo = haslo;
         }catch(NullValue n){
             java.lang.System.out.println(n);
-        }catch(TooShortPassword t){
+        }catch(BadPasswordException t){
             java.lang.System.out.println(t);
         }
     }
@@ -63,10 +63,10 @@ public class User {
     public void setHaslo(String haslo) {
         try {
             if(haslo.length()<6){
-                throw new TooShortPassword();
+                throw new BadPasswordException();
             }
             this.haslo = haslo;
-        }catch(TooShortPassword t){
+        }catch(BadPasswordException t){
             System.out.println(t);
         }
     }

@@ -45,14 +45,38 @@ class NoRecords extends RuntimeException{
     }
 }
 
-class TooShortPassword extends RuntimeException{
-    private String wiadomosc;
+ class BadDataException extends Exception{
 
-    public TooShortPassword(){
-        wiadomosc="Hasło jest za krótkie, musi mieć min. 6 znaków";
+    private String message;
+    private String field;
+
+    public BadDataException(String field){
+        this.field = field;
     }
 
+    @Override
     public String toString(){
-        return wiadomosc;
+        return "Niepoprawne dane!";
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
+}
+
+
+class BadPasswordException extends Exception{
+
+    private String message;
+
+    public BadPasswordException(){}
+
+    @Override
+    public String toString(){
+        return "Hasło musi posiadać od 6 do 20 znaków, w tym co najmniej jedną małą i duża literę, cyfrę, oraz znak specjalny.";
     }
 }
