@@ -45,17 +45,22 @@ public class Sesja implements Runnable{
             Statement stm=con.createStatement();
 
             if(zapytanie.contains("Select")){
+                //System.out.println("1");
                 ResultSet result=stm.executeQuery(zapytanie);
+                //System.out.println("2");
                 ResultSetMetaData resultMeta =result.getMetaData();
+                //System.out.println("3");
                 //zmienna na wynik zapytania
                 String rezultat="";
                 while(result.next()){
                     for(int i=1;i<=resultMeta.getColumnCount();i++){
                         if(resultMeta.getColumnType(i)!=2004){
-                            rezultat+=resultMeta.getColumnName(i)+": "+result.getString(i)+";";
+                            //rezultat+=resultMeta.getColumnName(i)+": "+result.getString(i)+";";
+                            rezultat+=result.getString(i)+";";
                         }
                     }
                 }
+                System.out.println(rezultat);
                 pw.println(rezultat);
             }else{
                 stm.executeQuery(zapytanie);

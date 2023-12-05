@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static java.time.LocalDateTime.*;
 
@@ -29,8 +31,8 @@ class Launcher {
             Socket socket = ss.accept();
             System.out.println("pos");
             Sesja o = new Sesja(socket);
-            Thread t = new Thread(o);
-            t.start();
+            ExecutorService exec= Executors.newCachedThreadPool();
+            exec.submit(o);
 //            PrintWriter pw=new PrintWriter(socket.getOutputStream(), true);
 //            InputStreamReader isr=new InputStreamReader(socket.getInputStream());
 //            BufferedReader br=new BufferedReader(isr);
