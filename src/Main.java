@@ -24,14 +24,18 @@ class Launcher {
     }
 
     private void handleConnection() throws IOException {
+
         ServerSocket ss = new ServerSocket(6700);
+        ExecutorService exec= Executors.newCachedThreadPool();
+        Socket socket;
+
 
         while (true) {
             System.out.println("ps");
-            Socket socket = ss.accept();
+            socket = ss.accept();
             System.out.println("pos");
             Sesja o = new Sesja(socket);
-            ExecutorService exec= Executors.newCachedThreadPool();
+
             exec.submit(o);
 //            PrintWriter pw=new PrintWriter(socket.getOutputStream(), true);
 //            InputStreamReader isr=new InputStreamReader(socket.getInputStream());
@@ -44,6 +48,7 @@ class Launcher {
 //
 //            pw.close();
         }
+       //exec.shutdownNow();
     }
 }
 
