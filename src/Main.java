@@ -2,17 +2,10 @@ import sk.*;
 
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.*;
 
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static java.time.LocalDateTime.*;
 
 class Launcher {
     public Launcher() {
@@ -25,17 +18,21 @@ class Launcher {
 
     private void handleConnection() throws IOException {
 
+        //utworzenie socketu serwera
         ServerSocket ss = new ServerSocket(6700);
+        //utworzenie wykonawcy na wątki
         ExecutorService exec= Executors.newCachedThreadPool();
         Socket socket;
 
 
         while (true) {
             System.out.println("ps");
+            //przejęcie połączenia od klienta
             socket = ss.accept();
             System.out.println("pos");
+            //utworzenie wątku z połączeniem do klienta
             Sesja o = new Sesja(socket);
-
+            //uruchomienie wątku
             exec.submit(o);
 //            PrintWriter pw=new PrintWriter(socket.getOutputStream(), true);
 //            InputStreamReader isr=new InputStreamReader(socket.getInputStream());
