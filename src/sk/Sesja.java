@@ -12,9 +12,11 @@ import static java.lang.Thread.sleep;
 
 public class Sesja implements Runnable{
     private Socket socket;
+    private int id;
 
     public Sesja(Socket socket){
         this.socket=socket;
+        this.id=(int)((Math.random()*9999)+1000);
     }
 
     public void run(){
@@ -80,6 +82,7 @@ public class Sesja implements Runnable{
                     //Zamknięcie połączenia
                     con.close();
                 }catch(SocketException s){
+                    System.out.println("Host "+id+" zakończył połączenie");
                     break;
                 }
             }
