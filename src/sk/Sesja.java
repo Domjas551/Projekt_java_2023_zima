@@ -1,12 +1,10 @@
 package sk;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.net.SocketException;
 import java.sql.*;
+import java.util.Scanner;
 
 import static java.lang.Thread.sleep;
 
@@ -34,7 +32,15 @@ public class Sesja implements Runnable{
             //System.out.println("przesłanie");
 
             while(true){
-                try {//odczytanie informacji od klienta
+
+                try {
+                    //odczytanie danych do połączenia z BD
+                    File plik=new File("db_credentials.txt");
+                    Scanner odczyt=new Scanner(plik);
+                    String db_dane=odczyt.nextLine();
+                    String s1[]=db_dane.split(";");
+
+                    //odczytanie informacji od klienta
                     String zapytanie = br.readLine();
 
                     //Utworzenie połączenia do BD
@@ -43,10 +49,11 @@ public class Sesja implements Runnable{
                     //Utworzenie instancji połączenia
                     Connection con = DriverManager.getConnection(
                             //jbdc:oracle:connection details //[host]:[port]/[DB service name]
-                            "jdbc:oracle:thin:@149.156.138.232:1521:orcl",
-                            "sbd01",
-                            "sbd01"
+                            s1[0],
+                            s1[1],
+                            s1[2]
                     );
+
                     //Utworzenie zapytania
                     Statement stm = con.createStatement();
                     System.out.println(zapytanie);
@@ -71,7 +78,9 @@ public class Sesja implements Runnable{
                         pw.println(rezultat);
                     } else {
                         try{
-                            stm.executeQuery(zapytanie);
+                            int w=stm.executeUpdate(zapytanie);
+                            //todo do usuniecia
+                            System.out.println("Wynik: "+w);
                         }catch(SQLSyntaxErrorException s){
                             pw.println("Wprowadzenie/modyfikacja danych nieudana");
                         }catch (Exception e){
@@ -82,7 +91,13 @@ public class Sesja implements Runnable{
                     //Zamknięcie połączenia
                     con.close();
                 }catch(SocketException s){
+                    //blok odpowiedzialny za zakończenie pracy wątka w przypadku zamknięcia aplikacji użytkownika
                     System.out.println("Host "+id+" zakończył połączenie");
+                    break;
+                }catch(SQLException s){
+                    //blok odpowiedzialny za obsługe błędu przy próbie połączenia z BD
+                    System.out.println("Błąd przy próbie połączenia z BD");
+                    socket.close();
                     break;
                 }
             }
