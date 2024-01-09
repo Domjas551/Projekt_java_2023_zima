@@ -6,6 +6,7 @@ import java.net.Socket;
 import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.locks.ReentrantLock;
 
 class Launcher {
     public Launcher() {
@@ -22,6 +23,8 @@ class Launcher {
         ServerSocket ss = new ServerSocket(6700);
         //utworzenie wykonawcy na wątki
         ExecutorService exec= Executors.newCachedThreadPool();
+        //utworzenie rygla
+        ReentrantLock lock=new ReentrantLock();
         Socket socket;
 
 
@@ -31,7 +34,7 @@ class Launcher {
             socket = ss.accept();
             System.out.println("pos");
             //utworzenie wątku z połączeniem do klienta
-            Sesja o = new Sesja(socket);
+            Sesja o = new Sesja(socket,lock);
             //uruchomienie wątku
             exec.submit(o);
 //            PrintWriter pw=new PrintWriter(socket.getOutputStream(), true);
@@ -48,6 +51,7 @@ class Launcher {
        //exec.shutdownNow();
     }
 }
+
 
 public class Main {
     public static void main(String[] args) {
