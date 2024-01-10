@@ -114,7 +114,6 @@ public class Sesja implements Runnable{
                         }finally {
                             //wyjście z sekcji krytycznej
                             lock.unlock();
-                            System.out.println("unlock");
                         }
                     }else{
                         bd(pw,zapytanie);
